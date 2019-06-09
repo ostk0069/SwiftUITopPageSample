@@ -8,14 +8,6 @@
 
 import SwiftUI
 
-struct Post {
-    let id: Int
-    let username: String
-    let date: String
-    let text: String
-    let imageName: String
-}
-
 struct ContentView : View {
     
     let posts: [Post] = [
@@ -60,53 +52,6 @@ struct GroupDetailView: View {
         Text("Group Detail")
     }
 }
-
-struct GroupView: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Image("office")
-                .renderingMode(.original)
-                .cornerRadius(8)
-            
-            Text("cell1")
-                .lineLimit(nil)
-                .padding(.leading, 0)
-            
-        }.frame(width: 110, height: 170)
-    }
-}
-
-struct PostView: View  {
-    
-    let post: Post
-    
-    var body: some View {
-        VStack (alignment: .leading, spacing: 12) {
-            HStack {
-                Image(post.imageName)
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 60, height: 60)
-                    .clipped()
-                
-                VStack (alignment: .leading, spacing: 4) {
-                    Text(post.username).font(.headline)
-                    Text(post.date).font(.subheadline)
-                    }.padding(.leading, 8)
-                
-            }.padding(.leading, 16).padding(.top, 16)
-            
-            Text(post.text).lineLimit(nil).padding(.leading, 16).padding(.trailing, 32)
-            
-            Image(post.imageName)
-                .scaledToFill()
-                .frame(height: 350)
-                .clipped()
-            
-        }.padding(.leading, -20).padding(.bottom, -8).padding(.trailing, -20)
-    }
-}
-
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
