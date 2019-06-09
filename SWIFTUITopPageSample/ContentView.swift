@@ -19,33 +19,60 @@ struct Post {
 struct ContentView : View {
     
     let posts: [Post] = [
-        .init(id: 1, username: "osataku", date: "April 1st 20:00", text: "東京理科大学", imageName: "office"),
-        .init(id: 2, username: "tetchan", date: "April 1st 20:00", text: "フォントをこよなく愛してる", imageName: "tree"),
-        .init(id: 3, username: "gaku", date: "April 1st 20:00", text: "BLAMに新卒採用が決まりました", imageName: "corner")
+        .init(id: 1, username: "osataku", date: "April 1st 20:00", text: "東京理科大学にいます", imageName: "office"),
+        .init(id: 2, username: "tetchan", date: "April 1st 20:00", text: "フォントをこよなく愛してるんです", imageName: "tree"),
+        .init(id: 3, username: "gaku", date: "April 1st 20:00", text: "BLAMに新卒入社が決まりました", imageName: "corner")
         ]
     
     var body: some View {
         NavigationView {
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Trending")
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Image("office")
-                            Text("cell1").lineLimit(nil)
-                        }.frame(width: 120, height: 180).padding(.leading, 0)
-                    }
-                }
-            }.frame(height: 200)
-            
             List {
+                VStack(alignment: .leading) {
+                    Text("コンテンツ").font(.headline)
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                NavigationButton(destination: GroupDetailView()) {
+                                    GroupView()
+                                }
+                                NavigationButton(destination: GroupDetailView()) {
+                                    GroupView()
+                                }
+                                NavigationButton(destination: GroupDetailView()) {
+                                    GroupView()
+                                }
+                            }
+                        }
+                    }.frame(height: 380)
+                }
+                
                 ForEach(posts.identified(by: \.id)) { post in
                     PostView(post: post)
                 }
                 
             }.navigationBarTitle(Text("List Title"))
         }
+    }
+}
+
+struct GroupDetailView: View {
+    var body: some View {
+        Text("Group Detail")
+    }
+}
+
+struct GroupView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Image("office")
+                .renderingMode(.original)
+                .cornerRadius(8)
+            
+            Text("cell1")
+                .lineLimit(nil)
+                .padding(.leading, 0)
+            
+        }.frame(width: 110, height: 170)
     }
 }
 
